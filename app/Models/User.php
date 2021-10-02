@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\UserHobby;
+use App\Models\UserInterest;
+use App\Models\UserNotification;
+use App\Models\UserPicture;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -61,5 +65,45 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function images()
+    {
+        return $this->hasMany(UserPicture::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(UserNotification::class);
+    }
+
+    public function hobbies()
+    {
+        return $this->hasMany(UserHobby::class);
+    }
+
+    public function interests()
+    {
+        return $this->hasMany(UserInterest::class);
+    }
+
+    // Both for getting user connections, Checks user1_id & user2_id :: use with(["connectionsOne","connectionsTwo"]);
+    public function connections()
+    {
+        return $this->load(["connectionsOne", "connectionsTwo"]);
+    }
+
+    public function connectionsOne()
+    {
+        return $this->hasMany(UserConnection::class, "user1_id", "id");
+    }
+    public function connectionsTwo()
+    {
+        return $this->hasMany(UserConnection::class, "user2_id", "id");
+    }
+
+    public function blocked()
+    {
+        return $this->hasMany(UserBlock::class, "from_user_id", "id");
     }
 }

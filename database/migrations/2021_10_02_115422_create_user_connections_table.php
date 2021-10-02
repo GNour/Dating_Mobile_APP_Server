@@ -17,6 +17,7 @@ class CreateUserConnectionsTable extends Migration
             $table->id();
             $table->foreignId('user1_id')->constrained("users");
             $table->foreignId('user2_id')->constrained("users");
+            $table->boolean('response')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
