@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,4 +35,11 @@ Route::group([
     Route::get("/{user}", [UserController::class, "show"]);
     Route::post("/edit", [UserController::class, "update"]);
     Route::post("/delete/account", [UserController::class, "destroy"]);
+
+    Route::group([
+        'prefix' => 'connect',
+    ], function () {
+        Route::post("/match", [ConnectionController::class, "store"]);
+        Route::get("/delete/{userconnection}", [ConnectionController::class, "destroy"]);
+    });
 });
