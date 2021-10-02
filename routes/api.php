@@ -26,6 +26,12 @@ Route::group([
     });
 });
 
-Route::middleware(['auth:api'])->group(function () {
-    Route::get("/test", [UserController::class, "getUserConnections"]);
+Route::group([
+    'prefix' => 'user',
+    'middleware' => 'auth:api',
+], function () {
+    Route::get("/connections", [UserController::class, "getUserConnections"]);
+    Route::get("/{user}", [UserController::class, "show"]);
+    Route::post("/edit", [UserController::class, "update"]);
+    Route::post("/delete/account", [UserController::class, "destroy"]);
 });

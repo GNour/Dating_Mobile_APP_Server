@@ -14,4 +14,14 @@ class UserConnection extends Model
         'user2_id',
     ];
 
+    public function userOne()
+    {
+        return $this->belongsTo(User::class, "user1_id");
+    }
+
+    public function userTwo()
+    {
+        return $this->belongsTo(User::class, "user2_id");
+    }
+
 }
