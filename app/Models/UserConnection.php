@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class UserConnection extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user1_id',
+        'user2_id',
+    ];
+
 }

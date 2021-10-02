@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class UserPicture extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'picture_url',
+        'is_profile_picture',
+    ];
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\UserConnection;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -31,7 +32,8 @@ class DatabaseSeeder extends Seeder
         $user->interested_in = 1;
         $user->height = 180;
         $user->weight = 80;
-
         $user->save();
+
+        UserConnection::factory(10)->create();
     }
 }

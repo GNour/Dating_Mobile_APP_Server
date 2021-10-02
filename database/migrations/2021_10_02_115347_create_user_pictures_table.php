@@ -18,7 +18,7 @@ class CreateUserPicturesTable extends Migration
             $table->foreignId('user_id')->constrained("users");
             $table->text('picture_url');
             $table->boolean('is_profile_picture');
-            $table->boolean('is_approved');
+            $table->boolean('is_approved')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

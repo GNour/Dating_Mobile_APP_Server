@@ -18,8 +18,8 @@ class CreateUserMessagesTable extends Migration
             $table->foreignId('sender_id')->constrained("users");
             $table->foreignId('receiver_id')->constrained("users");
             $table->text('body');
-            $table->boolean('is_approved');
-            $table->boolean('is_read');
+            $table->boolean('is_approved')->default(0);
+            $table->boolean('is_read')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
