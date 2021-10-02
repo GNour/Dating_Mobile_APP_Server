@@ -34,6 +34,10 @@ class DatabaseSeeder extends Seeder
         $user->weight = 80;
         $user->save();
 
-        UserConnection::factory(10)->create();
+        User::factory(10)->has(UserConnection::factory(5), "connectionsOne")
+            ->has(UserConnection::factory(5), "connectionsTwo")
+            ->hasHobbies(10)
+            ->hasInterests(10)
+            ->create();
     }
 }

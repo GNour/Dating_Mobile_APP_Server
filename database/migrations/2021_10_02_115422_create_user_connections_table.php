@@ -15,8 +15,8 @@ class CreateUserConnectionsTable extends Migration
     {
         Schema::create('user_connections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user1_id')->constrained("users");
-            $table->foreignId('user2_id')->constrained("users");
+            $table->foreignId('user1_id')->constrained("users")->onDelete("cascade");
+            $table->foreignId('user2_id')->constrained("users")->onDelete("cascade");
             $table->boolean('response')->default(0);
             $table->timestamps();
             $table->softDeletes();

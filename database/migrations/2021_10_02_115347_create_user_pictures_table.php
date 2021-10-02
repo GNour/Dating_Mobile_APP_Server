@@ -15,7 +15,7 @@ class CreateUserPicturesTable extends Migration
     {
         Schema::create('user_pictures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained("users");
+            $table->foreignId('user_id')->constrained("users")->onDelete("cascade");
             $table->text('picture_url');
             $table->boolean('is_profile_picture');
             $table->boolean('is_approved')->default(0);

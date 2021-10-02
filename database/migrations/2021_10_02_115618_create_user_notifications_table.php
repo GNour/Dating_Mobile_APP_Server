@@ -15,7 +15,7 @@ class CreateUserNotificationsTable extends Migration
     {
         Schema::create('user_notifications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained("users");
+            $table->foreignId('user_id')->constrained("users")->onDelete("cascade");
             $table->string('body');
             $table->boolean('is_read')->default(0);
             $table->timestamps();
