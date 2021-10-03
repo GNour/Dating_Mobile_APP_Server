@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InterestsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,4 +43,12 @@ Route::group([
         Route::post("/match", [ConnectionController::class, "store"]);
         Route::get("/delete/{userconnection}", [ConnectionController::class, "destroy"]);
     });
+});
+
+Route::group([
+    'prefix'=> 'user',
+    'middleware' => 'auth:api',
+], function(){
+    Route::post("/addInterest", [InterestsController::class, "AddInterest"]);
+    Route::delete("/deleteInterest/{id}", [InterestsController::class, "removeInterest"]);
 });
