@@ -11,7 +11,8 @@ class InterestsController extends Controller
 {
     public function addInterest(Request $request)
     {
-        $validated = Validator::make($request->all(), ['name' => 'required|string|between:1,100',
+        $validated = Validator::make($request->all(), [
+            'name' => 'required|string|between:1,100',
         ]);
 
         if ($validated->fails()) {
@@ -30,13 +31,20 @@ class InterestsController extends Controller
     {
 
         $interest = UserInterest::find($id);
+
         if ($interest->user_id == Auth::user()->id) {
             $interest->delete();
+
             return response()->json([
                 'message' => 'interest successfully removed from your profile!',
                 'interest' => $interest,
-            ], 201);} else {
-            return "You cannot remove an interest not related to your profile!";}
+            ], 201);
+
+        } else {
+            return response()->json([
+                'message' => "You cannot remove an interest not related to your profile!",
+            ], 401);
+        }
 
     }
 
