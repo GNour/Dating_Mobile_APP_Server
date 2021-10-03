@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\UserConnection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class ConnectionController extends Controller
 {
@@ -15,24 +14,16 @@ class ConnectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        $validator = Validator::make($request->all(), [
-            'user2_id' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-
         // Update response to 1 if the logged in user have been matched by the other user
         $connected = UserConnection::where('user2_id', auth()->user()->id)
-            ->where('user1_id', $request->only("user2_id"))
+            ->where('user1_id', $id)
             ->update(["response" => 1]);
 
         if (!$connected) {
             // Create the connection if both of them haven't previously matched other
-            $match = UserConnection::create(array_merge(["user1_id" => auth()->user()->id], $validator->validated()));
+            $match = UserConnection::create(["user1_id" => auth()->user()->id, "user2_id" => $id]);
         } else {
             $match = "Connected Togather!";
         }
@@ -52,7 +43,6 @@ class ConnectionController extends Controller
     public function destroy($id)
     {
         $connection = UserConnection::find($id);
-        dd($connection->user2_id);
         if (auth()->user()->id == $connection->user1_id || auth()->user()->id == $connection->user2_id) {
             $connection->delete();
 
@@ -62,7 +52,7 @@ class ConnectionController extends Controller
         } else {
 
             return response()->json([
-                'message' => "You cannot remove a hobby not related to your profile!",
+                'message' => "You cannot unmatch someone not related to you!",
             ], 401);
         }
 

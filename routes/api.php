@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlockController;
 use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\HobbiesController;
 use App\Http\Controllers\InterestsController;
@@ -36,13 +37,13 @@ Route::group([
     Route::get("/connections", [UserController::class, "getUserConnections"]);
     Route::get("/{user}", [UserController::class, "show"]);
     Route::post("/edit", [UserController::class, "update"]);
-    Route::post("/delete/account", [UserController::class, "destroy"]);
+    Route::delete("/delete/account", [UserController::class, "destroy"]);
 
     Route::group([
         'prefix' => 'connect',
     ], function () {
-        Route::post("/match", [ConnectionController::class, "store"]);
-        Route::get("/delete/{userconnection}", [ConnectionController::class, "destroy"]);
+        Route::get("/match/{id}", [ConnectionController::class, "store"]);
+        Route::delete("/delete/{userconnection}", [ConnectionController::class, "destroy"]);
     });
 
     Route::group([
@@ -61,4 +62,11 @@ Route::group([
 
     });
 
+    Route::group([
+        'prefix' => 'block',
+        'middleware' => 'auth:api',
+    ], function () {
+        Route::get("/add/{id}", [BlockController::class, "store"]);
+        Route::delete("/delete/{id}", [BlockController::class, "destroy"]);
+    });
 });
