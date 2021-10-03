@@ -70,17 +70,32 @@ class User extends Authenticatable implements JWTSubject
 
     public function images()
     {
-        return $this->hasMany(UserPicture::class);
+        return $this->hasMany(UserPicture::class)->where("is_profile_picture", 0);
     }
 
-    public function notifications()
+    public function profilePicture()
     {
-        return $this->hasMany(UserNotification::class);
+        return $this->hasOne(UserPicture::class, "user_id", "id")->where("is_profile_picture", 1);
+    }
+
+    public function newNotifications()
+    {
+        return $this->hasMany(UserNotification::class)->where("is_read", 0);
     }
 
     public function hobbies()
     {
         return $this->hasMany(UserHobby::class);
+    }
+
+    public function messagesSent()
+    {
+        return $this->hasMany(UserMessage::class, 'sender_id', 'id');
+    }
+
+    public function messagesReceived()
+    {
+        return $this->hasMany(UserMessage::class, 'receiver_id', 'id');
     }
 
     public function interests()
