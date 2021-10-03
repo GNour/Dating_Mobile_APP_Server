@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InterestsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,4 +36,5 @@ Route::group([
     'middleware' => 'auth:api',
 ], function(){
     Route::post("/addInterest", [InterestsController::class, "AddInterest"]);
+    Route::delete("/deleteInterest/{id}", [InterestsController::class, "removeInterest"]);
 });
