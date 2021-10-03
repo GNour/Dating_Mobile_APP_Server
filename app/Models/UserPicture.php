@@ -14,4 +14,9 @@ class UserPicture extends Model
         'picture_url',
         'is_profile_picture',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, "user_id");
+    }
 }
