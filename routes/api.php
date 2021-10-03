@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlockController;
 use App\Http\Controllers\ConnectionController;
@@ -29,6 +30,13 @@ Route::group([
     Route::middleware(['auth:api'])->group(function () {
         Route::post("/logout", [AuthController::class, "logout"]);
     });
+});
+
+Route::group([
+    'prefix' => 'notification',
+    'middleware' => 'auth:api',
+], function () {
+    Route::post("/create", [NotificationController::class, "store"]);
 });
 
 Route::group([
@@ -82,9 +90,20 @@ Route::group([
 
 });
 
-Route::group([
-    'prefix' => 'notification',
-    'middleware' => 'auth:api',
-], function () {
-    Route::post("/create", [NotificationController::class, "store"]);
+Route::middleware(['auth:api', 'auth.role:Admin'])->prefix("admin")->group(function () {
+
+    Route::group([
+        'prefix' => 'images',
+    ], function () {
+        Route::get("/", [AdminController::class, "getImagesForApproveQueue"]);
+        Route::get("/approve/{id}", [AdminController::class, "approveImage"]);
+    });
+
+    Route::group([
+        'prefix' => 'messages',
+    ], function () {
+        Route::get("/", [AdminController::class, "getMessagesForApproveQueue"]);
+        Route::get("/approve/{id}", [AdminController::class, "approveMessage"]);
+    });
+
 });
