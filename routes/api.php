@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConnectionController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\HobbiesController;
 use App\Http\Controllers\InterestsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
  */
-
 Route::group([
     'prefix' => 'auth',
 ], function () {
@@ -32,6 +32,7 @@ Route::group([
     'prefix' => 'user',
     'middleware' => 'auth:api',
 ], function () {
+
     Route::get("/connections", [UserController::class, "getUserConnections"]);
     Route::get("/{user}", [UserController::class, "show"]);
     Route::post("/edit", [UserController::class, "update"]);
@@ -43,12 +44,21 @@ Route::group([
         Route::post("/match", [ConnectionController::class, "store"]);
         Route::get("/delete/{userconnection}", [ConnectionController::class, "destroy"]);
     });
-});
 
-Route::group([
-    'prefix'=> 'user',
-    'middleware' => 'auth:api',
-], function(){
-    Route::post("/addInterest", [InterestsController::class, "AddInterest"]);
-    Route::delete("/deleteInterest/{id}", [InterestsController::class, "removeInterest"]);
+    Route::group([
+        'prefix' => 'interest',
+    ], function () {
+        Route::post("/add", [InterestsController::class, "addInterest"]);
+        Route::delete("/delete/{id}", [InterestsController::class, "removeInterest"]);
+    });
+
+    Route::group([
+        'prefix' => 'hobby',
+        'middleware' => 'auth:api',
+    ], function () {
+        Route::post("/add", [HobbiesController::class, "addHobby"]);
+        Route::post("/delete/{id}", [HobbiesController::class, "removeHobby"]);
+
+    });
+
 });
