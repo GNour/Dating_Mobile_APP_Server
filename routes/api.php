@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HobbiesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
  */
-
 Route::group([
     'prefix' => 'auth',
 ], function () {
@@ -26,6 +26,18 @@ Route::group([
     });
 });
 
+
 Route::middleware(['auth:api'])->group(function () {
     Route::get("/test", [UserController::class, "getUserConnections"]);
+});
+
+// Route::post("/addHobby", [HobbiesController::class, "AddHobby"]);
+
+Route::group([
+    'prefix' => 'user',
+    'middleware' => 'auth:api',
+], function () {
+    Route::post("/addHobby", [HobbiesController::class, "addHobby"]);
+    Route::post("/removeHobby/{id}", [HobbiesController::class, "removeHobby"]);
+
 });
