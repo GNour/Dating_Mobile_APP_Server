@@ -6,6 +6,7 @@ use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\HobbiesController;
 use App\Http\Controllers\InterestsController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PictureController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -69,6 +70,14 @@ Route::group([
     ], function () {
         Route::get("/add/{id}", [BlockController::class, "store"]);
         Route::delete("/delete/{id}", [BlockController::class, "destroy"]);
+    });
+
+    Route::group([
+        'prefix' => 'img',
+        'middleware' => 'auth:api',
+    ], function () {
+        Route::post("/upload", [PictureController::class, "store"]);
+        Route::delete("/delete/{id}", [PictureController::class, "destroy"]);
     });
 
 });
