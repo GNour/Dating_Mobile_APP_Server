@@ -58,14 +58,3 @@ class UserController extends Controller
         ], 200);
     }
 }
-
-// USER: HobbyController, InterestController, ConnectController,
-// NotificationController, PictureController, ChatController
-
-// Admin: PictureController, ChatController
-
-// Optional: BlockController
-
-// Joumana: HobbyController, NotificationController
-// Karim: InterstController, ChatController
-// Ghyath: UserController

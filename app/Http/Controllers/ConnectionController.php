@@ -51,9 +51,20 @@ class ConnectionController extends Controller
      */
     public function destroy($id)
     {
-        UserConnection::find($id)->delete();
-        return response()->json([
-            'message' => 'Unmatched',
-        ], 200);
+        $connection = UserConnection::find($id);
+        dd($connection->user2_id);
+        if (auth()->user()->id == $connection->user1_id || auth()->user()->id == $connection->user2_id) {
+            $connection->delete();
+
+            return response()->json([
+                'message' => 'Unmatched',
+            ], 200);
+        } else {
+
+            return response()->json([
+                'message' => "You cannot remove a hobby not related to your profile!",
+            ], 401);
+        }
+
     }
 }
