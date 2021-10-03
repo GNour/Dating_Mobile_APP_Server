@@ -29,3 +29,10 @@ Route::group([
 Route::middleware(['auth:api'])->group(function () {
     Route::get("/test", [UserController::class, "getUserConnections"]);
 });
+
+Route::group([
+    'prefix'=> 'user',
+    'middleware' => 'auth:api',
+], function(){
+    Route::post("/addInterest", [InterestsController::class, "AddInterest"]);
+});
