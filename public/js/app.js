@@ -2219,7 +2219,13 @@ function Navbar(props) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              axios.post("http://localhost:8000/api/auth/logout").then(function (response) {});
+              axios.post("http://localhost:8000/api/auth/logout", {}, {
+                headers: {
+                  Authorization: "Bearer ".concat(localStorage.getItem("token"))
+                }
+              }).then(function (response) {
+                console.log(response.data);
+              });
 
             case 1:
             case "end":
@@ -2271,7 +2277,7 @@ function Navbar(props) {
             className: "nav-item",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
               className: "nav-link",
-              to: "/login",
+              to: "/",
               onClick: logout,
               children: "Logout"
             })

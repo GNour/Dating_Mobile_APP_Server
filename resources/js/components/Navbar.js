@@ -4,8 +4,20 @@ import { NavLink } from "react-router-dom";
 export default function Navbar(props) {
     const logout = async (event) => {
         axios
-            .post("http://localhost:8000/api/auth/logout")
-            .then((response) => {});
+            .post(
+                "http://localhost:8000/api/auth/logout",
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "token"
+                        )}`,
+                    },
+                }
+            )
+            .then((response) => {
+                console.log(response.data);
+            });
     };
     return (
         <div>
@@ -39,7 +51,7 @@ export default function Navbar(props) {
                         <li className="nav-item">
                             <NavLink
                                 className="nav-link"
-                                to="/login"
+                                to="/"
                                 onClick={logout}
                             >
                                 Logout
