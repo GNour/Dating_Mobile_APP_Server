@@ -48,6 +48,7 @@ Route::group([
     Route::get("/{user}", [UserController::class, "show"]);
     Route::post("/edit", [UserController::class, "update"]);
     Route::delete("/delete/account", [UserController::class, "destroy"]);
+    Route::get("/", [UserController::class, "getUserInterestedIn"]);
 
     Route::group([
         'prefix' => 'connect',

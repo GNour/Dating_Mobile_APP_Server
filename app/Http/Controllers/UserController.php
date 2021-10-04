@@ -14,6 +14,12 @@ class UserController extends Controller
         return response()->json(array("connections" => auth()->user()->connections()));
     }
 
+    public function getUserInterestedIn()
+    {
+
+        return response()->json(User::where([["gender", auth()->user()->interested_in], ["interested_in", auth()->user()->gender]])->with(["previewImages"])->get());
+    }
+
     public function show(User $user)
     {
         // Remove $user->connections() if we don't need to preview his connections
