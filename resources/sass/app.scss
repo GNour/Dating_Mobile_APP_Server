@@ -1,8 +1,20 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
+
+.logo_img {
+    height: 11rem;
+    width: 11rem;
+    border-radius: 100%;
+    background-image: url("../../public/images/heart.jpg");
+    background-size: cover;
+}
+
+.custom_col {
+    background-color: rgba(#e3342f, 0.8);
+}

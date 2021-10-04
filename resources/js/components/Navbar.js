@@ -1,7 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar(props) {
+    const logout = async (event) => {
+        axios
+            .post("http://localhost:8000/api/auth/logout")
+            .then((response) => {});
+    };
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark mb-5 bg-dark">
@@ -22,17 +27,21 @@ export default function Navbar() {
                 >
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/">
+                            <NavLink className="nav-link" to="/images">
                                 Images
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/about">
+                            <NavLink className="nav-link" to="/messages">
                                 Messages
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/logout">
+                            <NavLink
+                                className="nav-link"
+                                to="/login"
+                                onClick={logout}
+                            >
                                 Logout
                             </NavLink>
                         </li>

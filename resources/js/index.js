@@ -3,29 +3,33 @@ import ReactDOM from "react-dom";
 import Login from "./pages/Login";
 import Messages from "./pages/Messages";
 import Images from "./pages/Images";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    HashRouter,
+    Switch,
+    Route,
+    Redirect,
+} from "react-router-dom";
+import auth from "./auth";
 
 export default function App() {
     return (
         <Switch>
-            <Route exact path="/" component={Login} />
+            <Route exact path="/" render={(props) => <Login />} />
             <Route exact path="/images" component={Images} />
             <Route exact path="/messages" component={Messages} />
-            <Route exact path="/logout" component={Logout} />
+            <Route exact path="/logout" />
         </Switch>
     );
 }
 
-const Logout = () => {};
-
 if (document.getElementById("App")) {
     ReactDOM.render(
-        <Router>
+        <HashRouter>
             <React.StrictMode>
                 <App />
             </React.StrictMode>
-        </Router>,
+        </HashRouter>,
         document.getElementById("App")
     );
 }
