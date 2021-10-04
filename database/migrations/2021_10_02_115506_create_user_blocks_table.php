@@ -13,10 +13,10 @@ class CreateUserBlocksTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_blocked', function (Blueprint $table) {
+        Schema::create('user_blocks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('from_user_id')->constrained("users");
-            $table->foreignId('to_user_id')->constrained("users");
+            $table->foreignId('from_user_id')->constrained("users")->onDelete("cascade");
+            $table->foreignId('to_user_id')->constrained("users")->onDelete("cascade");
             $table->timestamps();
             $table->softDeletes();
         });
