@@ -2223,9 +2223,7 @@ function Navbar(props) {
                 headers: {
                   Authorization: "Bearer ".concat(localStorage.getItem("token"))
                 }
-              }).then(function (response) {
-                console.log(response.data);
-              });
+              }).then(function (response) {});
 
             case 1:
             case "end":
@@ -2462,7 +2460,6 @@ var Login = function Login() {
                 password: password
               }).then(function (response) {
                 setRedirect(true);
-                console.log(response.data);
                 _auth__WEBPACK_IMPORTED_MODULE_2__["default"].login(response.data);
               });
 

@@ -14,7 +14,6 @@ const Login = () => {
             .post("http://localhost:8000/api/auth/login", { email, password })
             .then((response) => {
                 setRedirect(true);
-                console.log(response.data);
                 auth.login(response.data);
             });
     };

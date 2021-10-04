@@ -15,9 +15,7 @@ export default function Navbar(props) {
                     },
                 }
             )
-            .then((response) => {
-                console.log(response.data);
-            });
+            .then((response) => {});
     };
     return (
         <div>
