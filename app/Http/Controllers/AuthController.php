@@ -19,14 +19,32 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json([$validator->errors(), "code" => 422]);
         }
 
         if (!$token = JWTAuth::attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Unauthorized', "code" => 401]);
         }
 
-        return $this->loginUser($token);
+        return $this->loginUser($token, false);
+    }
+
+    public function adminLogin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|string|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([$validator->errors(), "code" => 422]);
+        }
+
+        if (!$token = JWTAuth::attempt($validator->validated())) {
+            return response()->json(['message' => 'Unauthorized', "code" => 401]);
+        }
+
+        return $this->loginUser($token, true);
     }
 
     public function register(Request $request)
@@ -70,13 +88,20 @@ class AuthController extends Controller
         return response()->json(["message" => "Logged out successfully"]);
     }
 
-    private function loginUser($token)
+    private function loginUser($token, $is_admin)
     {
+        if ($is_admin) {
+            if (auth()->user()->role !== "Admin") {
+                return response()->json(['message' => 'Unauthorized', "code" => 401]);
+            }
+        }
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => JWTAuth::factory()->getTTL() * 24 * 60,
             'user' => auth()->user(),
+            'code' => 200,
         ]);
+
     }
 }
