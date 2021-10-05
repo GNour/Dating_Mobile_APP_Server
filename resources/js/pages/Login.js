@@ -3,6 +3,9 @@ import auth from "../auth";
 import { useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
+
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -11,10 +14,27 @@ const Login = () => {
         event.preventDefault();
 
         axios
-            .post("http://localhost:8000/api/auth/login", { email, password })
+            .post("http://localhost:8000/api/auth/admin/login", {
+                email,
+                password,
+            })
             .then((response) => {
-                setRedirect(true);
+                let code = response.data.code;
+                console.log(code);
+                if (parseInt(code) !== 200) {
+                    if (parseInt(code) == 401) {
+                        throw new Error("Unauthorized");
+                    }
+                    if (parseInt(code) == 422) {
+                        throw new Error("Password or Email are wrong!");
+                    }
+                }
+                toast.success("Successfully logged in");
                 auth.login(response.data);
+                setRedirect(true);
+            })
+            .catch((err) => {
+                toast.error(err.toString());
             });
     };
 
@@ -51,7 +71,10 @@ const Login = () => {
                                 />
                             </div>
 
-                            <button type="submit" className="btn btn-primary">
+                            <button
+                                type="submit"
+                                className="btn btn-block btn-primary"
+                            >
                                 Submit
                             </button>
                         </form>
@@ -59,6 +82,11 @@ const Login = () => {
                     <div className="col-sm"></div>
                 </div>
             </div>
+            <ToastContainer
+                position="bottom-center"
+                icon={false}
+                autoClose={2000}
+            />
         </>
     );
 };
