@@ -10015,3 +10015,7 @@ h3 {
 .custom_col {
   background-color: rgba(227, 52, 47, 0.8);
 }
+
+body.antialiased {
+  background-color: #efefef;
+}
