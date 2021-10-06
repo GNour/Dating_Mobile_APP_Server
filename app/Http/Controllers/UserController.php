@@ -23,7 +23,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         // Remove $user->connections() if we don't need to preview his connections
-        return response()->json([$user->load(["hobbies", "interests", "images"]), $user->connections()]);
+        return response()->json($user->load(["hobbies", "interests", "images"]));
     }
 
     public function update(Request $request)

@@ -33,8 +33,8 @@ class UserFactory extends Factory
             'height' => $this->faker->numberBetween(150, 200),
             'weight' => $this->faker->numberBetween(50, 100),
             'nationality' => $this->faker->text(),
-            'city' => $this->faker->text(),
-            'country' => $this->faker->text(),
+            'city' => $this->faker->text(10),
+            'country' => $this->faker->text(10),
             'bio' => $this->faker->text(200),
             'role' => $this->faker->randomElement(["Admin", "User"]),
         ];
