@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export default function Navbar(props) {
-    const logout = async (event) => {
+export default function Navbar() {
+    const logout = async () => {
         axios
             .post(
                 "http://localhost:8000/api/auth/logout",
@@ -19,7 +19,7 @@ export default function Navbar(props) {
     };
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-dark mb-5 bg-dark">
+            <nav className="navbar custom__navbar navbar-expand-lg navbar-dark mb-5">
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -36,19 +36,25 @@ export default function Navbar(props) {
                     id="navbarSupportedContent"
                 >
                     <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/images">
+                        <li className="nav-item custom__navbar__link">
+                            <NavLink
+                                className="nav-link custom__navbar__link--a"
+                                to="/images"
+                            >
                                 Images
                             </NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/messages">
+                        <li className="nav-item custom__navbar__link">
+                            <NavLink
+                                className="nav-link custom__navbar__link--a"
+                                to="/messages"
+                            >
                                 Messages
                             </NavLink>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item custom__navbar__link">
                             <NavLink
-                                className="nav-link"
+                                className="nav-link custom__navbar__link--a"
                                 to="/"
                                 onClick={logout}
                             >

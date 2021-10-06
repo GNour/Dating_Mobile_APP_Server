@@ -10008,14 +10008,53 @@ h3 {
   height: 11rem;
   width: 11rem;
   border-radius: 100%;
-  background-image: url(/images/heart.jpg?0d69dc666cdc6d2c4ae6cd01868b8751);
+  background-image: url(/images/money_sugar.jpg?9d141e7da233ff6c982fc711b5b067c9);
   background-size: cover;
 }
 
 .custom_col {
-  background-color: rgba(227, 52, 47, 0.8);
+  background-color: white;
+  filter: drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.248));
 }
 
 body.antialiased {
   background-color: #efefef;
+}
+
+.card__image {
+  width: 18rem;
+  margin: 5px;
+}
+
+.custom__text {
+  color: #ea4848;
+  text-transform: capitalize;
+}
+
+.custom__btn {
+  background-color: #ea4848;
+  color: #fff;
+  border-radius: 50px;
+}
+.custom__btn:hover {
+  color: #fff;
+  background-color: #ea4848;
+}
+
+.custom__navbar {
+  background-color: #ea4848;
+  padding: 0;
+  box-sizing: content-box;
+}
+.custom__navbar__link {
+  padding: 5px;
+}
+.custom__navbar__link:hover {
+  background-color: #fff;
+}
+.custom__navbar__link:hover .custom__navbar__link--a {
+  transition: all 0.4s;
+}
+.custom__navbar__link:hover .custom__navbar__link--a:hover {
+  color: #ea4848;
 }

@@ -19,10 +19,27 @@ class AdminController extends Controller
         if ($image) {
             return response()->json([
                 'message' => 'Approved',
+                'code' => 200,
             ], 200);
         } else {
             return response()->json([
                 'message' => "Couldn't Approve Image",
+            ], 400);
+        }
+    }
+
+    public function declineImage($id)
+    {
+        $image = UserPicture::where("id", $id)->update(["is_approved" => -1]);
+
+        if ($image) {
+            return response()->json([
+                'message' => 'Declined',
+                'code' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => "Couldn't Decline Image",
             ], 400);
         }
     }
@@ -39,10 +56,27 @@ class AdminController extends Controller
         if ($message) {
             return response()->json([
                 'message' => 'Approved',
+                'code' => 200,
             ], 200);
         } else {
             return response()->json([
                 'message' => "Couldn't Approve Message",
+            ], 400);
+        }
+    }
+
+    public function declineMessage($id)
+    {
+        $message = UserMessage::where("id", $id)->update(["is_approved" => -1]);
+
+        if ($message) {
+            return response()->json([
+                'message' => 'Decline',
+                'code' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => "Couldn't Decline Message",
             ], 400);
         }
     }

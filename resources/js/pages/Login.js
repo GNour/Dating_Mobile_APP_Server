@@ -4,7 +4,6 @@ import { useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.min.css";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -13,14 +12,13 @@ const Login = () => {
     const submit = async (event) => {
         event.preventDefault();
 
-        axios
+        await axios
             .post("http://localhost:8000/api/auth/admin/login", {
                 email,
                 password,
             })
             .then((response) => {
                 let code = response.data.code;
-                console.log(code);
                 if (parseInt(code) !== 200) {
                     if (parseInt(code) == 401) {
                         throw new Error("Unauthorized");
@@ -73,7 +71,7 @@ const Login = () => {
 
                             <button
                                 type="submit"
-                                className="btn btn-block btn-primary"
+                                className="btn custom__btn btn-block"
                             >
                                 Submit
                             </button>

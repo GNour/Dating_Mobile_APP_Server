@@ -99,6 +99,7 @@ Route::middleware(['auth:api', 'auth.role:Admin'])->prefix("admin")->group(funct
     ], function () {
         Route::get("/", [AdminController::class, "getImagesForApproveQueue"]);
         Route::get("/approve/{id}", [AdminController::class, "approveImage"]);
+        Route::get("/decline/{id}", [AdminController::class, "declineImage"]);
     });
 
     Route::group([
@@ -106,6 +107,7 @@ Route::middleware(['auth:api', 'auth.role:Admin'])->prefix("admin")->group(funct
     ], function () {
         Route::get("/", [AdminController::class, "getMessagesForApproveQueue"]);
         Route::get("/approve/{id}", [AdminController::class, "approveMessage"]);
+        Route::get("/decline/{id}", [AdminController::class, "declineMessage"]);
     });
 
 });
