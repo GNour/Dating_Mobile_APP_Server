@@ -12,14 +12,16 @@ import {
 } from "react-router-dom";
 import auth from "./auth";
 import "react-toastify/dist/ReactToastify.min.css";
+import { ProtectedRoute } from "./protected.route";
 
 export default function App() {
     return (
         <Switch>
             <Route exact path="/" render={(props) => <Login />} />
-            <Route exact path="/images" component={Images} />
-            <Route exact path="/messages" component={Messages} />
+            <ProtectedRoute exact path="/images" component={Images} />
+            <ProtectedRoute exact path="/messages" component={Messages} />
             <Route exact path="/logout" />
+            <Route path="*" component={() => "404 Not Found!"} />
         </Switch>
     );
 }
