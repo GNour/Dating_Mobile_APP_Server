@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import auth from "../auth";
 
 export default function Navbar() {
     const logout = async () => {
@@ -15,7 +16,9 @@ export default function Navbar() {
                     },
                 }
             )
-            .then((response) => {});
+            .then((response) => {
+                auth.logout();
+            });
     };
     return (
         <div>

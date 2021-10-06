@@ -101,6 +101,12 @@ const Messages = () => {
                     </div>
                 </div>
             </div>
+
+            <ToastContainer
+                position="bottom-center"
+                icon={false}
+                autoClose={2000}
+            />
         </>
     );
 };

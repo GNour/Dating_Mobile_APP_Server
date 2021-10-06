@@ -4,9 +4,11 @@ class Auth {
     }
 
     login(data) {
+        const tmrw = new Date();
+        tmrw.setTime(tmrw.getTime() + 24 * 60 * 60 * 1000);
         this.auth = true;
         localStorage.setItem("token", data.access_token);
-        localStorage.setItem("token_expiary", data.expires_in);
+        localStorage.setItem("token_expiary", tmrw.toLocaleTimeString());
         localStorage.setItem("user", JSON.stringify(data.user));
     }
 

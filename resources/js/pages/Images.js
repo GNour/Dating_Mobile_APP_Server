@@ -4,7 +4,11 @@ import ImageCard from "../components/ImageCard";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import {
+    CSSTransition,
+    TransitionGroup,
+    Transition,
+} from "react-transition-group";
 const Images = () => {
     const [images, setImg] = useState([]);
     useEffect(() => {
@@ -72,14 +76,14 @@ const Images = () => {
                 <div className="d-flex justify-content-center flex-wrap">
                     {images.map((image) => {
                         return (
-                            <CSSTransition timeout={300} key={image.id}>
+                            <Transition timeout={300} key={image.id}>
                                 <ImageCard
                                     approve={() => approve}
                                     decline={() => decline}
                                     image={image}
                                     key={image.id}
                                 />
-                            </CSSTransition>
+                            </Transition>
                         );
                     })}
                 </div>
