@@ -10058,3 +10058,13 @@ body.antialiased {
 .custom__navbar__link:hover .custom__navbar__link--a:hover {
   color: #ea4848;
 }
+.custom__message__col {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  background-color: black;
+}
+.custom__message__container {
+  overflow-y: auto;
+  overflow-x: hidden;
+}

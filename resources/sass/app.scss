@@ -68,3 +68,16 @@ body.antialiased {
         }
     }
 }
+
+.custom__message {
+    &__col {
+        height: 40px;
+        width: 40px;
+        border-radius: 100%;
+        background-color: black;
+    }
+    &__container {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
